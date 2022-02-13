@@ -12,8 +12,13 @@ namespace Blog.Application.Mapping.Profiles
             //Domain to Dto.
             CreateMap <Post, GetPostsViewModel> ();
 
+            CreateMap <Category, CategoryDto> ();
+
             //Dto to Domain or use ReverseMap().
             CreateMap<GetPostsViewModel, Post>()
+                .ForMember(p => p.Id, opt => opt.Ignore());  
+            
+            CreateMap<CategoryDto, Category>()
                 .ForMember(p => p.Id, opt => opt.Ignore());
         }
     }
