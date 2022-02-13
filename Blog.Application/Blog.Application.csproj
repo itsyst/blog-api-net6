@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\" />
+    <Folder Include="Features\Posts\Commands\Update\" />
+    <Folder Include="Features\Posts\Commands\Delete\" />
+    <Folder Include="Features\Posts\Commands\Create\" />
+    <Folder Include="Features\Posts\Queries\GetPostDetail\" />
   </ItemGroup>
 
   <ItemGroup>
