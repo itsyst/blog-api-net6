@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Blog.Application.Mapping.Dtos;
+using Blog.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,5 +20,10 @@ namespace Blog.Application.Features.Posts.Queries.GetPosts
 
         [Required]
         public string Excerpt { get; set; } = string.Empty;
+
+        public ICollection<Tag> Tags { get; } = new List<Tag>();
+
+        public ICollection<Comment> Comments { get; } = new List<Comment>();
+
     }
 }
