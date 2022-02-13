@@ -9,7 +9,6 @@ namespace Blog.Persistence.Repositories
 
     public class PostRepository : BaseRepository<Post>, IPostRepository 
     {
-        internal readonly DbSet<Post> _table;
         public PostRepository(ApplicationDbContext context) : base(context)
         {
         }
