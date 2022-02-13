@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Blog.Application.Features.Posts.Commands.Create;
+using Blog.Application.Features.Posts.Queries.GetPostDetail;
 using Blog.Application.Features.Posts.Queries.GetPosts;
 using Blog.Application.Mapping.Dtos;
 using Blog.Domain;
@@ -9,16 +11,26 @@ namespace Blog.Application.Mapping.Profiles
     {
         public MappingProfile()
         {
+            //Domain to Dto and Dto to Domain
+            CreateMap<Post, GetPostsViewModel>().ReverseMap();
+            CreateMap<Post, GetPostViewModel>().ReverseMap();
+            CreateMap<Post, CreatePostCommand>().ReverseMap();
+
+
             //Domain to Dto.
-            CreateMap <Post, GetPostsViewModel> ();
+            CreateMap<Category, CategoryDto>();
+            CreateMap<Comment, CommentDto>();
+            CreateMap<Post, PostDto>();
+            CreateMap<Tag, TagDto>();
 
-            CreateMap <Category, CategoryDto> ();
-
-            //Dto to Domain or use ReverseMap().
-            CreateMap<GetPostsViewModel, Post>()
-                .ForMember(p => p.Id, opt => opt.Ignore());  
-            
+            //Dto to Domain or use ReverseMap().     
             CreateMap<CategoryDto, Category>()
+                .ForMember(p => p.Id, opt => opt.Ignore());            
+            CreateMap<CommentDto, Comment>()
+                .ForMember(p => p.Id, opt => opt.Ignore());            
+            CreateMap<PostDto, Post>()
+                .ForMember(p => p.Id, opt => opt.Ignore());           
+            CreateMap<TagDto, Tag>()
                 .ForMember(p => p.Id, opt => opt.Ignore());
         }
     }
