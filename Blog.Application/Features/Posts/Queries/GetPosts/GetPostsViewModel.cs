@@ -1,11 +1,5 @@
 ﻿using Blog.Application.Mapping.Dtos;
-using Blog.Domain;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Blog.Application.Features.Posts.Queries.GetPosts
 {
@@ -23,9 +17,9 @@ namespace Blog.Application.Features.Posts.Queries.GetPosts
 
         public CategoryDto CategoryDto { get; set; } = new CategoryDto();
 
-        public ICollection<Tag> Tags { get; } = new List<Tag>();
+        public ICollection<TagDto> TagsDto { get; } = new List<TagDto>();
 
-        public ICollection<Comment> Comments { get; } = new List<Comment>();
+        public ICollection<CommentDto> CommentsDto { get; } = new List<CommentDto>();
 
     }
 }
