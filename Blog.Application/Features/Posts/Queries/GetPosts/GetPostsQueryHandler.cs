@@ -16,8 +16,8 @@ namespace Blog.Application.Features.Posts.Queries.GetPosts
         }
         public async Task<List<GetPostsViewModel>> Handle(GetPostsQuery request, CancellationToken cancellationToken)
         {
-            var posts = await _postRepository.GetAllPostsAsync(filter:null, p => p.Category, p => p.Comments, p => p.Tags);
-            return _mapper.Map<List<GetPostsViewModel>>(posts.OrderByDescending(p=>p.CreatedAt));
+            var posts = await _postRepository.GetAllPostsAsync(filter:null, p => p.Categories, p => p.Comments, p => p.Tags);
+            return _mapper.Map<List<GetPostsViewModel>>(posts);
         }
     }
 }

@@ -15,11 +15,5 @@ namespace Blog.Application.Features.Posts.Queries.GetPosts
         [Required]
         public string Excerpt { get; set; } = string.Empty;
 
-        public CategoryDto CategoryDto { get; set; } = new CategoryDto();
-
-        public ICollection<TagDto> TagsDto { get; } = new List<TagDto>();
-
-        public ICollection<CommentDto> CommentsDto { get; } = new List<CommentDto>();
-
     }
 }
