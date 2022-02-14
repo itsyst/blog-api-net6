@@ -4,6 +4,7 @@ namespace Blog.Application.Mapping.Dtos
 {
     public class PostDto
     {
+        [Key]
         public Guid Id { get; set; }
 
         [Required]
@@ -20,11 +21,9 @@ namespace Blog.Application.Mapping.Dtos
         [DataType(DataType.DateTime)]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
+        public ICollection<CategoryDto> CategoriesDto { get; } = new List<CategoryDto>();
 
-        public CategoryDto CategoryDto { get; set; } = new CategoryDto();
-        public Guid CategoryId { get; set; }
-
-        public ICollection<TagDto> TagsDto { get; } = new List<TagDto>();
+        public ICollection<TagDto> Tags { get; } = new List<TagDto>();
 
         public ICollection<CommentDto> CommentsDto { get; } = new List<CommentDto>();
 

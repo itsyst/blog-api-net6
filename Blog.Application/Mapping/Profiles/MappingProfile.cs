@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Blog.Application.Features.Posts.Commands.Create;
+using Blog.Application.Features.Posts.Commands.Delete;
+using Blog.Application.Features.Posts.Commands.Update;
 using Blog.Application.Features.Posts.Queries.GetPostDetail;
 using Blog.Application.Features.Posts.Queries.GetPosts;
 using Blog.Application.Mapping.Dtos;
@@ -15,6 +17,8 @@ namespace Blog.Application.Mapping.Profiles
             CreateMap<Post, GetPostsViewModel>().ReverseMap();
             CreateMap<Post, GetPostViewModel>().ReverseMap();
             CreateMap<Post, CreatePostCommand>().ReverseMap();
+            CreateMap<Post, UpdatePostCommand>().ReverseMap();
+            CreateMap<Post, DeletePostCommand>().ReverseMap();
 
 
             //Domain to Dto.
