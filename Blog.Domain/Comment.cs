@@ -14,5 +14,6 @@ namespace Blog.Domain
         [DataType(DataType.DateTime)]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
+        public Guid PostId { get; set; }
     }
 }

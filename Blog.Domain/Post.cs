@@ -20,11 +20,8 @@ namespace Blog.Domain
 
         [DataType(DataType.DateTime)]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-
-        public Category Category { get; set; } = new Category();
-        public Guid CategoryId { get; set; }
-
+ 
+        public ICollection<Category> Categories { get; } = new List<Category>();
 
         public ICollection<Tag> Tags { get; } = new List<Tag>();
 
