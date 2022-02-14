@@ -1,5 +1,6 @@
 ﻿using Blog.Application.Interfaces;
 using Blog.Domain;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Blog.Persistence
@@ -20,49 +21,77 @@ namespace Blog.Persistence
             //migrations if they are not applied
             try
             {
-                _context.Database.EnsureCreated();
+                if(_context.Database.GetPendingMigrations().Any())
+                    _context.Database.Migrate();
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while seeding the database.");
             }
 
-            // Create covers
-            if (!_context.Posts.Any())
+            // Create categories
+            if (!_context.Categories.Any())
             {
-                var postGuidOne = Guid.Parse("{6315579F-7837-473A-A4D5-A5571B43E6A6}");
-                var categoryIdGuidOne = Guid.Parse("{6315579F-7837-473A-KHS2-A5571B43E6A6}");
-
-                var postGuidTwo = Guid.Parse("{C0788D5F-8003-43C1-92A4-EDC76A7C5DDE}");
-                var categoryIdGuidTwo = Guid.Parse("{6315579F-7837-473A-KHS2-R89E1B43T22R}");
-
-
-
-                _context.Posts.AddRange(new List<Post>()
+                _context.Categories.AddRange(new List<Category>()
                     {
-                        new Post()
+                        new Category()
                         {
-                            Id = postGuidOne,
-                            Title = "First Tile blog post.",
-                            ImageUrl = "https://source.unsplash.com/random/600x200/?posts",
-                            Excerpt = "Lorem ipsum dolor sit amet",
-                            Content = "First Content blog post.",
-                            CategoryId = categoryIdGuidOne,
-                            CreatedAt = DateTime.Parse("2022-13-02")
-                        },
-                        new Post()
-                        {
-                            Id = postGuidTwo,
-                            Title = "First Tile blog post.",
-                            ImageUrl = "https://source.unsplash.com/random/600x200/?posts",
-                            Excerpt = "Lorem ipsum dolor sit amet",
-                            Content = "First Content blog post.",
-                            CategoryId = categoryIdGuidTwo,
-                            CreatedAt = DateTime.Parse("2022-13-03")
+                            Id = Guid.Parse("{6626ca37-6e94-4a28-ae57-742ba0ec23e6}"),
+                            Name = "First category."
                         }
                     });
                 _context.SaveChanges();
             }
+
+            // Create posts
+            if (!_context.Posts.Any())
+            {
+                _context.Posts.AddRange(new List<Post>()
+                    {
+                        new Post()
+                        {
+                            Id = Guid.Parse("{1516e9e4-f235-45af-a93c-e1fb9a0d5225}"),
+                            Title = "First Tile blog post.",
+                            ImageUrl = "https://source.unsplash.com/random/600x200/?posts",
+                            Excerpt = "Lorem ipsum dolor sit amet",
+                            Content = "First Content blog post.",
+                            CreatedAt = DateTime.UtcNow,
+                         }
+                    });
+                _context.SaveChanges();
+            }
+
+            // Create Tags
+            if (!_context.Tags.Any())
+            {
+                _context.Tags.AddRange(new List<Tag>()
+                    {
+                        new Tag()
+                        {
+                            Id = Guid.Parse("{b4c23068-9081-4506-a6a3-1db00d63f7c2}"),
+                            Name = "First Tag blog post.",
+                            PostId = Guid.Parse("{1516e9e4-f235-45af-a93c-e1fb9a0d5225}"),
+                        }
+                    });
+                _context.SaveChanges();
+            }
+
+            // Create Comments
+            if (!_context.Comments.Any())
+            {
+                _context.Comments.AddRange(new List<Comment>()
+                    {
+                        new Comment()
+                        {
+                            Id = Guid.Parse("{b2fcc163-58d2-46b9-8b9c-432783785693}"),
+                            Content = "First Comment blog post.",
+                            CreatedAt = DateTime.UtcNow.AddDays(1),
+                            PostId = Guid.Parse("{1516e9e4-f235-45af-a93c-e1fb9a0d5225}"),
+                        }
+                    });
+                _context.SaveChanges();
+            }
+
             return;
         }
     }
