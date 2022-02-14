@@ -16,7 +16,7 @@ namespace Blog.Application.Features.Posts.Queries.GetPostDetail
          }
         public async Task<GetPostViewModel> Handle(GetPostQuery request, CancellationToken cancellationToken)
         {
-            var post = await _postRepository.GetPostByIdAsync(request.PostId, includeProperties: "Comment, Tag, Category");
+            var post = await _postRepository.GetPostByIdAsync(request.PostId, tracked:true, p=>p.Categories, p=>p.Comments, p=>p.Tags);
             return _mapper.Map<GetPostViewModel>(post);
         }
     }

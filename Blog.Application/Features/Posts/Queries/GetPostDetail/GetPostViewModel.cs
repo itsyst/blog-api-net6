@@ -5,6 +5,7 @@ namespace Blog.Application.Features.Posts.Queries.GetPostDetail
 {
     public class GetPostViewModel
     {
+        [Key]
         public Guid Id { get; set; }
 
         [Required]
@@ -14,7 +15,11 @@ namespace Blog.Application.Features.Posts.Queries.GetPostDetail
         [Required]
         public string Content { get; set; } = string.Empty;
 
-        public CategoryDto CategoryDto { get; set; } = new CategoryDto();
+
+        [DataType(DataType.DateTime)]
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        public ICollection<CategoryDto> CategoriesDto { get; } = new List<CategoryDto>();
 
         public ICollection<TagDto> TagsDto { get; } = new List<TagDto>();
 
