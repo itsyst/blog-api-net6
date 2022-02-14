@@ -33,7 +33,7 @@ namespace Blog.Persistence.Repositories
          
         }
 
-        public async Task<Post> GetPostByIdAsync(Guid id, string? includeProperties = null, bool tracked = true)
+        public async Task<Post> GetPostByIdAsync(Guid id, bool tracked = true, params Expression<Func<Post, object>>[] includeProperties)
         {
             if (tracked)
             {
@@ -42,7 +42,7 @@ namespace Blog.Persistence.Repositories
 
                 if (includeProperties != null)
                 {
-                    foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                    foreach (var includeProp in includeProperties)
                     {
                         query = query.Include(includeProp);
                     }
@@ -56,7 +56,7 @@ namespace Blog.Persistence.Repositories
  
                 if (includeProperties != null)
                 {
-                    foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                    foreach (var includeProp in includeProperties)
                     {
                         query = query.Include(includeProp);
                     }
