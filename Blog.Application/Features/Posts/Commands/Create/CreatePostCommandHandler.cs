@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using Blog.Application.Interfaces;
+using Blog.Application.Mapping.Dtos;
 using Blog.Domain;
 using MediatR;
 
 namespace Blog.Application.Features.Posts.Commands.Create
 {
-    public class UpdatePostCommandHandler : IRequestHandler<CreatePostCommand, Guid>
+    public class UpdatePostCommandHandler : IRequestHandler<CreatePostCommand, Post>
     {
         private readonly IPostRepository _postRepository;
         private readonly IMapper _mapper;
@@ -17,7 +18,7 @@ namespace Blog.Application.Features.Posts.Commands.Create
         }
 
 
-        public async Task<Guid> Handle(CreatePostCommand request, CancellationToken cancellationToken)
+        public async Task<Post> Handle(CreatePostCommand request, CancellationToken cancellationToken)
         {
             Post post = _mapper.Map<Post>(request);
 
@@ -27,9 +28,7 @@ namespace Blog.Application.Features.Posts.Commands.Create
             if (result.Errors.Any())
                 throw new Exception("Post is not valid");
 
-            post = await _postRepository.AddAsync(post);
-
-            return post.Id;
-        }
+           return await _postRepository.AddAsync(post);
+         }
     }
 }

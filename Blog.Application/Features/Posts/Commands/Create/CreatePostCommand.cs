@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Blog.Application.Features.Posts.Commands.Create
 {
-    public class CreatePostCommand : IRequest<Guid>
+    public class CreatePostCommand : IRequest<Post>
     {
         public Guid Id { get; set; }    
         public string Title { get; set; } = string.Empty;
@@ -14,8 +14,6 @@ namespace Blog.Application.Features.Posts.Commands.Create
         public string Content { get; set; } = string.Empty;
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-        public Guid CategoryId { get; set; }
 
     }
 }
