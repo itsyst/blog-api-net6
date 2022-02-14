@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Blog.Application.Features.Posts.Commands.Update
 {
-    public class UpdatePostCommandHandler : IRequestHandler<UpdatePostCommand>
+    public class UpdatePostCommandHandler : IRequestHandler<UpdatePostCommand, Post>
     {
         private readonly IPostRepository _postRepository;
         private readonly IMapper _mapper;
@@ -16,11 +16,10 @@ namespace Blog.Application.Features.Posts.Commands.Update
             _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
+        public async Task<Post> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
         {
             Post post = _mapper.Map<Post>(request);
-            await _postRepository.UpdateAsync(post);
-            return Unit.Value;
+            return await _postRepository.UpdateAsync(post);
         }
     }
 }

@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using Blog.Domain;
+using MediatR;
 
 namespace Blog.Application.Features.Posts.Commands.Update
 {
-    public class UpdatePostCommand : IRequest
+    public class UpdatePostCommand : IRequest<Post>
     {
         public Guid Id { get; set; }
         public string Title { get; set; } = string.Empty;
@@ -12,8 +13,5 @@ namespace Blog.Application.Features.Posts.Commands.Update
 
         public string Content { get; set; } = string.Empty;
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-        public Guid CategoryId { get; set; }
     }
 }
